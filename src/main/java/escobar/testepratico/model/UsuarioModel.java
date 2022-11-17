@@ -6,35 +6,26 @@ import javax.persistence.*;
 public class UsuarioModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer codigo;
-   // @Column(nullable = false, length = 50)
-   // public String email;
+    @Column(nullable = false, length = 50)
+    public String email;
     @Column(nullable = false, length = 50)
     public String logradouro;
-    @Column(nullable = false, length = 5)
-    public Integer numero;
+    @Column(nullable = false, length = 30)
+    public String complemento;
     @Column(nullable = false, length = 50)
     public String bairro;
     @Column(nullable = false, length = 50)
-    public String cidade;
+    public String localidade;
     @Column(nullable = false, length = 50)
     public String uf;
     @Column(nullable = false, length = 8)
     public String cep;
 
-//    public String getEmail() {
-//        return email;
-//    }
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-    public Integer getCodigo() {
-        return codigo;
+    public String getEmail() {
+        return email;
     }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLogradouro() {
@@ -45,12 +36,12 @@ public class UsuarioModel {
         this.logradouro = logradouro;
     }
 
-    public Integer getNumero() {
-        return numero;
+    public String getComplemento() {
+        return complemento;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 
     public String getBairro() {
@@ -61,24 +52,36 @@ public class UsuarioModel {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getLocalidade() {
+        return localidade;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
     }
 
     public String getUf() {
         return uf;
     }
 
-    public void setUf(String estado) {
+    public void setUf(String uf) {
         this.uf = uf;
     }
 
     public String getCep() {
         return cep;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "Logradouro='" + logradouro + '\'' +
+                ", Numero=" + complemento +
+                ", Bairro='" + bairro + '\'' +
+                ", Cidade='" + localidade + '\''+
+                ", Estado='" + uf + '\'' +
+                ", Cep='" + cep + '\'' +
+                '}';
     }
 
     public void setCep(String cep) {
