@@ -48,7 +48,6 @@ public class UsuarioController {
             jsonCep.append(cepAux);
         }
 
-        // System.out.println(jsonCep);
         UsuarioModel userAux = new Gson().fromJson(jsonCep.toString(), UsuarioModel.class);
         System.out.println(userAux.toString());
         usuario.setEmail(email);
