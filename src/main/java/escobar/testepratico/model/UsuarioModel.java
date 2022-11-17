@@ -1,90 +1,64 @@
 package escobar.testepratico.model;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Classe responsável para representar o usuário e seus atributos.
+ */
 @Entity(name = "usuario")
+@Table(name = "usuario")
 public class UsuarioModel {
 
     @Id
     @Column(nullable = false, length = 50)
-    public String email;
-    @Column(nullable = false, length = 50)
-    public String logradouro;
-    @Column(nullable = false, length = 30)
-    public String complemento;
-    @Column(nullable = false, length = 50)
-    public String bairro;
-    @Column(nullable = false, length = 50)
-    public String localidade;
-    @Column(nullable = false, length = 50)
-    public String uf;
-    @Column(nullable = false, length = 8)
-    public String cep;
+    private String email;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "email_usuario", foreignKey = @ForeignKey(name = "fk_endereco_usuario"))
+    @JsonBackReference
+    private List<EnderecoModel> enderecoModelList = new ArrayList<>();
+
+    /**
+     * Método construtor do Modelo de usuário sem parâmetros.
+     */
+    public UsuarioModel() {
+
+    }
+
+    /**
+     * Método para retornar a lista de endereços cadastrados.
+     * @return endereçoModelList List - Lista de endereços.
+     */
+    public List<EnderecoModel> getEnderecoModelList() {
+        return enderecoModelList;
+    }
+
+    /**
+     * Método construtor do modelo de usuário.
+     * @param email String -  Endereço de e-mail do usuário.
+     * @param enderecoModelList List - Lista de endereços.
+     */
+    public UsuarioModel(String email, List<EnderecoModel> enderecoModelList) {
+        this.email = email;
+        this.enderecoModelList = enderecoModelList;
+    }
+
+    /**
+     * Método para retornar o endereço de e-mail do usuário.
+     * @return email String.
+     */
     public String getEmail() {
         return email;
     }
+    /**
+     * Método para alterar o endereço de e-mail do usuário.
+     * @return email String - Endereço de e-mail do usuário.
+     */
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getLocalidade() {
-        return localidade;
-    }
-
-    public void setLocalidade(String localidade) {
-        this.localidade = localidade;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "Logradouro='" + logradouro + '\'' +
-                ", Numero=" + complemento +
-                ", Bairro='" + bairro + '\'' +
-                ", Cidade='" + localidade + '\''+
-                ", Estado='" + uf + '\'' +
-                ", Cep='" + cep + '\'' +
-                '}';
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
     }
 }
