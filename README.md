@@ -13,11 +13,21 @@
 ## Certifique-se de instalar e configurar corretamente os softwares necessários para executar a aplicação.
 ## Verique e altere suas credenciais do MySQL em /teste-pratico/src/main/resources/application.properties para garantir que a aplicação consiga acessar o seu banco de dados.
 
+
+
 # Após instalar os softwares necessários é preciso realizar o download dos códigos ou clonar este repositório, logo após esse processo, basta abrir a IDE Intellij e executar o método main presente na classe "TestePraticoApplication".
 ## Dessa forma, a aplicação Spring é inicializada e permite que as chamadas dos métodos criados sejam realizadas através do servidor Tomcat pela porta 8080.
 ## Certifique-se de que a aplicação está rodando através da aba "Run" do Intellij. Se tudo estiver sendo executado corretamente, você poderá observar na aba Run algo do tipo: Started TestePraticoApplication...
 
-# Após executar a aplicação através do Intellij é necessário utilizar o software Postman para executar as operações e os seguintes formatos para cada uma das operações:
+# Outra forma de executar a aplicação é através do arquivo jar no qual a aplicação é empacotada com todos os recursos necessários para execução.
+# Para gerar o arquivo jar basta ir até o diretório raiz do projeto e executar o comando:
+## mvn clean package
+### Se houver falha nos testes durante o processo de build acrescente a flag -DskipTests
+## mvn clean package -DskipTests
+## basta ir até o diretório no qual o arquivo .jar está localiza e executar o comando:
+### java -jar teste-pratico-0.0.1-SNAPSHOT.jar
+
+# Após executar a aplicação através do Intellij ou pelo arquivo jar você pode utilizar o software Postman para executar as operações e os seguintes formatos para cada uma das operações:
 ### Verificar o Status da aplicação (Se está disponível ou não):
 #### GET localhost:8080/status
 ##### Se a aplicação estiver sendo executada corretamente você receberá no Postman a mensagem "online".
