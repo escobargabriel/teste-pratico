@@ -5,6 +5,7 @@ import escobar.testepratico.model.EnderecoModel;
 import escobar.testepratico.model.UsuarioModel;
 import escobar.testepratico.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -54,6 +55,7 @@ public class EnderecoController {
         UsuarioModel user = new UsuarioModel();
         user.setEmail(email);
         endereco.setUsuario(user);
+        endereco.setEmail(email);
 
 
         URL url = new URL("https://viacep.com.br/ws/"+ endereco.getCep() +"/json/");
@@ -76,5 +78,17 @@ public class EnderecoController {
         endereco.setLocalidade(enderecoModel.getLocalidade());
         endereco.setUf(enderecoModel.getUf());
         return enderecoRepository.save(endereco);
+    }
+    /**
+     * Método para buscar endereço pelo endereço de e-mail.
+     * @param email String - endereço de e-mail do usuário.
+     * @return usuario UsuarioModel - Retorna o objeto referente ao e-mail ou ocorre falha
+     * caso o e-mail não esteja cadastrado no banco.
+     */
+    @GetMapping(path = "/endereco/email/{email}")
+    public ResponseEntity<Object> buscarPorEmail(@PathVariable("email") String email) {
+        return enderecoRepository.findByEmail(email).
+                map(record -> ResponseEntity.ok().body(record))
+                .orElse(ResponseEntity.notFound().build());
     }
 }

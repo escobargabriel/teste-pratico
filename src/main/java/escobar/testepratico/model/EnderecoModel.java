@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 
+
 /**
  * Classe responsável por definir o modelo de endereço do usuário.
  */
@@ -17,7 +18,7 @@ public class EnderecoModel implements Serializable {
     private Long idEndereco;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "email_usuario", foreignKey = @ForeignKey(name = "fk_endereco_usuario"))
+    @JoinColumn(name = "email", foreignKey = @ForeignKey(name = "fk_endereco_usuario"))
     @JsonBackReference
     private UsuarioModel usuario;
 
@@ -33,6 +34,8 @@ public class EnderecoModel implements Serializable {
     private String uf;
     @Column(nullable = false, length = 8)
     private String cep;
+    @Column(nullable = false, length = 30, insertable = false, updatable = false)
+    private String email;
 
     /**
      * Método do construtor da classe com os atributos.
@@ -45,15 +48,16 @@ public class EnderecoModel implements Serializable {
      * @param uf String - Estado no qual o endereço está situado.
      * @param cep String - Código de endereçamento postal do endereço.
      */
-    public EnderecoModel(UsuarioModel usuario, Long idEndereco, String logradouro, String complemento, String bairro, String localidade, String uf, String cep) {
-        this.usuario = usuario;
+    public EnderecoModel(Long idEndereco, UsuarioModel usuario, String logradouro, String complemento, String bairro, String localidade, String uf, String cep, String email) {
         this.idEndereco = idEndereco;
+        this.usuario = usuario;
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.bairro = bairro;
         this.localidade = localidade;
         this.uf = uf;
         this.cep = cep;
+        this.email = email;
     }
 
     /**
@@ -173,5 +177,19 @@ public class EnderecoModel implements Serializable {
      */
     public void setCep(String cep) {
         this.cep = cep;
+    }
+    /**
+     * Método para retornar o e-mail do usuário.
+     * @return email String - Endereço de e-mail cadastrado para o usuário.
+     */
+    public String getEmail() {
+        return email;
+    }
+    /**
+     * Método para alterar o e-mail do cliente.
+     * @return e-mail String - Endereço de e-mail que identifica o usuário.
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

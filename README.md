@@ -32,6 +32,9 @@
 #### Dentro do campo do espaço para escrever o arquivo JSON basta adicionar uma entrada como esta:
 ##### { "cep": "XXXXXXXX" }
 ##### Utilize apenas os números do CEP, caso contrário não irá ter o compartamente esperado. Além disso, matenha as aspas duplas para manter a sintaxe do formato JSON.
+### Fazer uma consulta do endereço pelo e-mail do usuário.
+#### localhost:8080/endereco/email/seu-email-aqui@mail.com
+##### Você deverá alterar o endereço de e-mail na instrução acima para o e-mail deseja consultar.
 
 ## Dúvidas ou sugestões escreva para: escobarvasques@gmail.com.
 

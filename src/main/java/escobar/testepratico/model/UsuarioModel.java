@@ -14,13 +14,20 @@ import java.util.List;
 public class UsuarioModel {
 
     @Id
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, insertable = false, updatable = false)
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "email_usuario", foreignKey = @ForeignKey(name = "fk_endereco_usuario"))
+    @JoinColumn(name = "email", foreignKey = @ForeignKey(name = "fk_endereco_usuario"))
     @JsonBackReference
     private List<EnderecoModel> enderecoModelList = new ArrayList<>();
+
+    public void addEndereco(EnderecoModel enderecoModel) {
+        enderecoModelList.add(enderecoModel);
+    }
+    public void removeEndereco(EnderecoModel enderecoModel) {
+        enderecoModelList.remove(enderecoModel);
+    }
 
     /**
      * Método construtor do Modelo de usuário sem parâmetros.
@@ -35,6 +42,10 @@ public class UsuarioModel {
      */
     public List<EnderecoModel> getEnderecoModelList() {
         return enderecoModelList;
+    }
+
+    public void setEnderecoModelList(List<EnderecoModel> enderecoModelList) {
+        this.enderecoModelList = enderecoModelList;
     }
 
     /**
